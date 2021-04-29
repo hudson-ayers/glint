@@ -4,7 +4,7 @@ version := "0.1-SNAPSHOT"
 
 organization := "ch.ethz.inf.da"
 
-scalaVersion := "2.10.6"
+scalaVersion := "2.11.8"
 
 crossScalaVersions := Seq("2.10.6", "2.11.8")
 
@@ -106,4 +106,11 @@ ghpages.settings
 git.remoteRepo := "git@github.com:rjagerman/glint.git"
 
 site.includeScaladoc()
+
+initialize := {
+  val _ = initialize.value // run the previous initialization
+  val required = "1.8"
+  val current  = sys.props("java.specification.version")
+  assert(current == required, s"Unsupported JDK: java.specification.version $current != $required")
+}
 
